@@ -142,7 +142,7 @@ public class PrincipalConnectionSupplier implements ConnectionSupplier {
     }
 
     @Override
-    public boolean close() throws SQLException {
+    public void close() throws SQLException {
         HashMap<String,PreparedStatement> statementMap = localPreparedStatements.get();
         if (statementMap != null) {
             for (PreparedStatement statement : statementMap.values()) {
@@ -177,11 +177,7 @@ public class PrincipalConnectionSupplier implements ConnectionSupplier {
         if (cnx != null) {
             cnx.close();
             localConnection.remove();
-
-            return true;
         }
-
-        return false;
     }
 
     public void validateConnection() throws SQLException {

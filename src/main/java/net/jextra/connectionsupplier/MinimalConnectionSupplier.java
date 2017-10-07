@@ -112,7 +112,7 @@ public class MinimalConnectionSupplier implements ConnectionSupplier {
     }
 
     @Override
-    public boolean close() throws SQLException {
+    public void close() throws SQLException {
         for (PreparedStatement statement : preparedStatements.values()) {
             if (!statement.isClosed()) {
                 statement.close();
@@ -127,17 +127,11 @@ public class MinimalConnectionSupplier implements ConnectionSupplier {
         }
         preparedCalls.clear();
 
-        if (connection == null) {
-            return false;
-        }
-
         if (connection != null) {
             connection.close();
         }
 
         connection = null;
-
-        return true;
     }
 
     public void validateConnection() throws SQLException {

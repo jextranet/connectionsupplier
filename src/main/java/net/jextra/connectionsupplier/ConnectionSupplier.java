@@ -23,12 +23,12 @@ package net.jextra.connectionsupplier;
 
 import java.sql.*;
 
-public interface ConnectionSupplier {
+public interface ConnectionSupplier extends AutoCloseable {
     Connection getConnection() throws SQLException;
 
     PreparedStatement prepareStatement(String sql) throws SQLException;
 
     PreparedStatement prepareCall(String sql) throws SQLException;
 
-    boolean close() throws SQLException;
+    void close() throws SQLException;
 }
